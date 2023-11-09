@@ -39,7 +39,7 @@ app.use(cors()); //To refuse CORS error
 // For Add User
 app.post('/add_user',async(req,res)=>{
     try{
-        console.log("add user");
+        console.log("User Added");
         await userModel.create(req.body)
         res.status(200).send(
         {
@@ -55,7 +55,7 @@ app.post('/add_user',async(req,res)=>{
 // For Gel All User
 app.get('/get_user',async(req,res)=>{
     try{
-        console.log("get user");
+        console.log("Get All User");
         let data = await userModel.find();
         res.status(200).send({
             status:true,
@@ -70,7 +70,7 @@ app.get('/get_user',async(req,res)=>{
 // For Delete User
 app.delete('/delete_user/:id',async(req,res)=>{
     try{
-        console.log("User deleted");
+        console.log("User Deleted");
         await userModel.deleteOne({_id:req.params.id});
         // let data = await userModel.find();
         res.status(200).send({
@@ -86,7 +86,7 @@ app.delete('/delete_user/:id',async(req,res)=>{
 // For Update User
 app.put('/update_user',async(req,res)=>{
     try{
-        console.log("User deleted");
+        console.log("User Updated");
         let data = await userModel.updateOne({_id:req.body.id},req.body);
         res.status(200).send({
             status:true,
