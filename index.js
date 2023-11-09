@@ -1,14 +1,13 @@
-// const 
 import express from 'express';
 import mongoose from "mongoose"; 
 import cors from "cors"; 
-import http from 'http';
-import { create } from 'domain';
 const app = express();
-// const mongoose = require('mongoose');
+import http from 'http';
 
+// Database Connection
 mongoose.connect('mongodb://127.0.0.1:27017/test').then(()=>{console.log("Connected Successfully")}).catch((e)=>{console.log(e)});
 
+// Body Structure
 const userSchema = mongoose.Schema({
     fName:{
         type:String
@@ -27,11 +26,17 @@ const userSchema = mongoose.Schema({
     },
 })
 
-const userModel = mongoose.model('user',userSchema);
+const userModel = mongoose.model('user',userSchema); //Connection b/w Schema and Database
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(cors());
+app.use(express.json()) //Uses for post data to apis
+app.use(express.urlencoded({extended:true})) //Uses for post data
+app.use(cors()); //To refuse CORS error
+
+
+                // CRUD APIs
+
+
+// For Add User
 app.post('/add_user',async(req,res)=>{
     try{
         console.log("add user");
@@ -47,6 +52,7 @@ app.post('/add_user',async(req,res)=>{
     }
 });
 
+// For Gel All User
 app.get('/get_user',async(req,res)=>{
     try{
         console.log("get user");
@@ -61,6 +67,7 @@ app.get('/get_user',async(req,res)=>{
     }
 });
 
+// For Delete User
 app.delete('/delete_user/:id',async(req,res)=>{
     try{
         console.log("User deleted");
@@ -76,6 +83,7 @@ app.delete('/delete_user/:id',async(req,res)=>{
     }
 });
 
+// For Update User
 app.put('/update_user',async(req,res)=>{
     try{
         console.log("User deleted");
@@ -90,5 +98,6 @@ app.put('/update_user',async(req,res)=>{
     }
 });
 
+// Server Connection
 app.listen(4100,()=> console.log('listining to server at port 4100'))
 
